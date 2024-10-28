@@ -29,7 +29,7 @@ public class Main {
         System.out.println("Ciao, " + username + ", hai effettuato la connessione. Digita ESCI per uscire");
         do {
             System.out.println("Inserisci la nota da memorizzare o digita LISTA per visualizzare le note salvate.");
-            System.out.println("Inserisci GLOBALE per condividerla con tutti");
+            System.out.println("Digita GLOBALE per condividerla con tutti o digita RIMUOVI per rimuovere una nota");
             send = scanner.nextLine();
             switch (send) {
                 case "LISTA":
@@ -52,6 +52,17 @@ public class Main {
                     out.writeBytes(globalNote + "\n");
                     if (in.readLine().equals("OK")) {
                         System.out.println("Nota salvata");
+                    }
+                    break;
+                case "RIMUOVI":
+                    out.writeBytes("-" + "\n");    
+                    System.out.println("Inserire la nota da rimuovere: ");
+                    String remove = scanner.nextLine();
+                    out.writeBytes(remove + "\n");
+                    if (in.readLine().equals("OK")) {
+                        System.out.println("Nota rimossa");
+                    } else {
+                        System.out.println("Impossibile rimuovere questa nota");
                     }
                     break;
                 default:
