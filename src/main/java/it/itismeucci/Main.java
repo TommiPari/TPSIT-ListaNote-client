@@ -11,11 +11,22 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws UnknownHostException, IOException {
         Socket s = new Socket("127.0.0.1", 3000);
-        System.out.println("Connessione effettuata. Digita ESCI per uscire");
         BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
         DataOutputStream out = new DataOutputStream(s.getOutputStream());
-        String send;
         Scanner scanner = new Scanner(System.in);
+        String username;
+        String result;
+        do {
+            System.out.println("Inserire username: ");
+            username = scanner.nextLine();
+            out.writeBytes(username + "\n");
+            result = in.readLine();
+            if (result.equals("NO")) {
+                System.out.println("Username già inserito");
+            }
+        } while (result.equals("NO"));
+        String send;
+        System.out.println("Ciao, " + username + ", hai effettuato la connessione. Digita ESCI per uscire");
         do {
             System.out.println("Inserisci la nota da memorizzare o digita LISTA per visualizzare le note salvate.");
             System.out.println("Inserisci GLOBALE per condividerla con tutti");
@@ -32,6 +43,7 @@ public class Main {
                 case "ESCI":
                     out.writeBytes("!" + "\n");
                     System.out.println("Comunicazione terminata");
+                    out.writeBytes(username + "\n");
                     break;
                 case "GLOBALE":
                     out.writeBytes("+" + "\n");    
