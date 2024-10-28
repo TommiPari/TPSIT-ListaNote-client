@@ -18,6 +18,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         do {
             System.out.println("Inserisci la nota da memorizzare o digita LISTA per visualizzare le note salvate.");
+            System.out.println("Inserisci GLOBALE per condividerla con tutti");
             send = scanner.nextLine();
             switch (send) {
                 case "LISTA":
@@ -31,6 +32,15 @@ public class Main {
                 case "ESCI":
                     out.writeBytes("!" + "\n");
                     System.out.println("Comunicazione terminata");
+                    break;
+                case "GLOBALE":
+                    out.writeBytes("+" + "\n");    
+                    System.out.println("Inserire la nota: ");
+                    String globalNote = scanner.nextLine();
+                    out.writeBytes(globalNote + "\n");
+                    if (in.readLine().equals("OK")) {
+                        System.out.println("Nota salvata");
+                    }
                     break;
                 default:
                     out.writeBytes(send + "\n");
